@@ -7,9 +7,7 @@ De hele site zit in één bestand (`index.html`) — geen installatie, geen buil
 ## 🔗 Live bekijken
 
 Na het aanzetten van GitHub Pages staat de pagina op:
-
-- `https://pulles.github.io/` — als de repo **Pulles.github.io** heet, of
-- `https://pulles.github.io/<reponaam>/` — bij een gewone reponaam (bijv. `hockey`).
+](https://pulles.github.io/hockeyvoorkids/)
 
 ## 📚 Wat zit erin
 
