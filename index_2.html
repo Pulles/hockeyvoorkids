@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hockeytactiek voor kids — posities, opbouwen, verdedigen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch-a:#0e6d7a; --pitch-b:#1aa2af; --line:#eafcff;
+    --ours:#f6b41f; --ours-ink:#3a2600;
+    --opp:#e8503a; --opp-ink:#ffffff;
+    --ball:#ffffff; --ball-ring:#0c2b30;
+    --bg:#e7f1f0; --paper:#ffffff; --ink:#12333b; --ink-soft:#4a6a70;
+    --pass:#f6b41f; --run:#eafcff;
+    --shadow:0 10px 30px -12px rgba(9,45,52,.35);
+    --radius:20px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Nunito",system-ui,sans-serif; font-size:17px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.disp{font-family:"Fredoka",system-ui,sans-serif; font-weight:600; line-height:1.05; margin:0;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 20px;}
+  a{color:inherit}
+
+  /* ---------- cards (oefeningen / spelsituaties) ---------- */
+  .cards2{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px;}
+  .card{background:var(--paper); border:2px solid #d7e8e7; border-radius:16px; padding:18px 20px; box-shadow:var(--shadow);}
+  .card .tag{font-family:"Fredoka"; font-weight:600; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--pitch-a); background:#d3ecec; padding:4px 10px; border-radius:999px; display:inline-block; margin-bottom:9px;}
+  .card h3{font-size:1.12rem; margin:0 0 8px;}
+  .card p{margin:7px 0 0; font-weight:600; font-size:.96rem;}
+  .card .lbl{color:var(--ink-soft); font-weight:800; font-size:.72rem; text-transform:uppercase; letter-spacing:.05em; display:block; margin-top:10px;}
+  .card p b, .card span.hl{color:var(--pitch-a);}
+
+  .subhead{font-family:"Fredoka"; font-weight:600; font-size:1.4rem; margin:2px 0 14px; display:flex; align-items:center; gap:11px;}
+  .subhead .pill{font-size:.7rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#fff; padding:5px 12px; border-radius:999px;}
+  .pill.att{background:var(--ours); color:var(--ours-ink);}
+  .pill.def{background:var(--opp);}
+  .sc-block{margin-bottom:34px;}
+  .callout{background:#fff5e0; border:2px solid #f6d488; border-radius:14px; padding:14px 18px; font-weight:600; margin-top:6px;}
+  .callout b{color:#a86b00;}
+
+  /* ---------- top nav ---------- */
+  .topbar{position:sticky; top:0; z-index:50; background:rgba(231,241,240,.85); backdrop-filter:blur(8px); border-bottom:2px solid #cfe3e2;}
+  .topbar .wrap{display:flex; gap:10px; align-items:center; padding:10px 20px; flex-wrap:wrap;}
+  .brand{font-family:"Fredoka"; font-weight:700; font-size:1.05rem; letter-spacing:-.01em; display:flex; align-items:center; gap:8px; margin-right:auto;}
+  .brand .dot{width:16px;height:16px;border-radius:50%;background:var(--ours);border:3px solid var(--ink);}
+  .navchips{display:flex; gap:6px; flex-wrap:wrap;}
+  .navchips a{font-family:"Fredoka"; font-weight:500; font-size:.82rem; text-decoration:none; padding:6px 12px; border-radius:999px; background:#fff; border:2px solid #cfe3e2; color:var(--ink); white-space:nowrap;}
+  .navchips a:hover{border-color:var(--ours); transform:translateY(-1px);}
+  .navchips a:focus-visible{outline:3px solid var(--pitch-b); outline-offset:2px;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:46px 0 30px;}
+  .hero .grid{display:grid; grid-template-columns:1.1fr .9fr; gap:34px; align-items:center;}
+  .eyebrow{font-family:"Fredoka"; font-weight:600; text-transform:uppercase; letter-spacing:.12em; font-size:.74rem; color:var(--pitch-a); background:#d3ecec; display:inline-block; padding:5px 12px; border-radius:999px;}
+  .hero h1{font-size:clamp(2.3rem,6vw,3.9rem); font-weight:700; letter-spacing:-.02em; margin:16px 0 12px;}
+  .hero h1 .hl{color:var(--pitch-a);}
+  .hero p{font-size:1.12rem; color:var(--ink-soft); max-width:46ch; margin:0 0 20px;}
+  .legend{display:flex; flex-wrap:wrap; gap:14px 20px; margin-top:8px;}
+  .legend span{display:flex; align-items:center; gap:8px; font-weight:700; font-size:.9rem;}
+  .swatch{width:20px;height:20px;border-radius:50%; border:3px solid var(--ink); flex:none;}
+  .sw-ours{background:var(--ours)} .sw-opp{background:var(--opp)} .sw-ball{background:var(--ball)}
+  .sw-pass{border-radius:3px;border:none;height:6px;width:26px;background:repeating-linear-gradient(90deg,var(--pass) 0 8px,transparent 8px 13px)}
+
+  /* ---------- sections ---------- */
+  section{padding:34px 0;}
+  .sec-head{max-width:60ch; margin-bottom:22px;}
+  .sec-head h2{font-size:clamp(1.7rem,4vw,2.5rem); font-weight:700; letter-spacing:-.015em; margin:10px 0 8px;}
+  .sec-head p{color:var(--ink-soft); font-size:1.05rem; margin:0;}
+  .kicker{font-family:"Fredoka"; font-weight:600; color:var(--pitch-a); font-size:.8rem; letter-spacing:.14em; text-transform:uppercase;}
+
+  .panel{background:var(--paper); border:2px solid #d7e8e7; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden;}
+  .play-layout{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:26px; align-items:start;}
+
+  /* ---------- pitch figure ---------- */
+  figure.pitch{margin:0; background:var(--paper); border:2px solid #d7e8e7; border-radius:var(--radius); padding:16px; box-shadow:var(--shadow);}
+  .pitch svg{display:block; width:100%; height:auto; border-radius:12px;}
+  .pl circle{transition:none}
+  .pl text{font-family:"Fredoka"; font-weight:600; font-size:12px; pointer-events:none; user-select:none;}
+  .team-ours circle{fill:var(--ours); stroke:var(--ink); stroke-width:2.5}
+  .team-ours text{fill:var(--ours-ink)}
+  .team-opp circle{fill:var(--opp); stroke:var(--ink); stroke-width:2.5}
+  .team-opp text{fill:var(--opp-ink)}
+  .ball circle{fill:var(--ball); stroke:var(--ball-ring); stroke-width:2}
+  .halo{fill:none; stroke:var(--pitch-a); stroke-width:4; opacity:0; transition:opacity .2s;}
+  .pl.sel .halo{opacity:1}
+  .pl.clickable{cursor:pointer}
+  .pl.clickable:focus-visible{outline:none}
+  .pl.clickable:focus-visible circle{stroke:var(--pitch-a); stroke-width:4}
+
+  .anim-note{font-family:"Fredoka"; font-weight:500; text-align:center; font-size:1rem; color:var(--ink); background:#eef8f8; border:2px dashed #b7dcdb; border-radius:12px; padding:11px 14px; margin-top:14px; min-height:2.9em; display:flex; align-items:center; justify-content:center;}
+  .btnrow{display:flex; gap:10px; margin-top:14px; justify-content:center;}
+  button.act{font-family:"Fredoka"; font-weight:600; font-size:1rem; cursor:pointer; border:none; border-radius:999px; padding:11px 22px; display:inline-flex; align-items:center; gap:8px;}
+  button.play{background:var(--pitch-a); color:#fff;}
+  button.play:hover{background:#0a5a65;}
+  button.reset{background:#fff; color:var(--ink); border:2px solid #cfe3e2;}
+  button.act:disabled{opacity:.5; cursor:default}
+  button.act:focus-visible{outline:3px solid var(--ours); outline-offset:2px;}
+
+  /* ---------- tips ---------- */
+  .tips h3{font-size:1.25rem; margin-bottom:6px;}
+  ol.steps, ul.tips-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px;}
+  ol.steps li{display:flex; gap:13px; align-items:flex-start; font-weight:600;}
+  ol.steps .n{flex:none; width:30px;height:30px;border-radius:50%; background:var(--ours); color:var(--ours-ink); font-family:"Fredoka"; font-weight:700; display:grid;place-items:center; font-size:.95rem; border:2.5px solid var(--ink);}
+  ul.tips-list li{position:relative; padding-left:30px; font-weight:600;}
+  ul.tips-list li::before{content:""; position:absolute; left:2px; top:.5em; width:13px;height:13px; border-radius:4px; background:var(--pitch-b); border:2px solid var(--ink); transform:rotate(45deg);}
+  .tips-list li b, .steps li b{color:var(--pitch-a);}
+
+  /* ---------- position explorer ---------- */
+  .pos-card{background:var(--paper); border:2px solid #d7e8e7; border-radius:var(--radius); box-shadow:var(--shadow); padding:20px 22px;}
+  .pos-card .badge{display:inline-flex; align-items:center; gap:9px; font-family:"Fredoka"; font-weight:700; background:var(--ours); color:var(--ours-ink); padding:7px 14px; border-radius:999px; border:2.5px solid var(--ink); font-size:.95rem;}
+  .pos-card h3{font-size:1.55rem; margin:14px 0 2px;}
+  .pos-card .role{color:var(--ink-soft); font-weight:700; margin:0 0 14px;}
+  .pos-card ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px;}
+  .pos-card li{position:relative; padding-left:26px; font-weight:600;}
+  .pos-card li::before{content:""; position:absolute; left:3px; top:.5em; width:11px;height:11px;border-radius:50%; background:var(--pitch-b); border:2px solid var(--ink);}
+  .hint-tap{font-size:.9rem; color:var(--ink-soft); font-weight:700; margin-top:6px; text-align:center;}
+
+  /* ---------- rules ---------- */
+  .rules-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px;}
+  .rule{background:var(--paper); border:2px solid #d7e8e7; border-radius:16px; padding:16px 18px; box-shadow:var(--shadow);}
+  .rule .num{font-family:"Fredoka"; font-weight:700; color:var(--pitch-a); font-size:.85rem; letter-spacing:.1em;}
+  .rule p{margin:6px 0 0; font-weight:600;}
+
+  /* ---------- sources / footer ---------- */
+  .sources{background:#dcecec; border-radius:var(--radius); padding:22px 24px; margin-top:8px;}
+  .sources h3{font-size:1.2rem; margin-bottom:8px;}
+  .sources ul{margin:0;padding-left:18px} .sources li{margin:5px 0; font-weight:600;}
+  footer{padding:34px 0 60px; color:var(--ink-soft); font-size:.92rem;}
+
+  @media (max-width:820px){
+    .hero .grid{grid-template-columns:1fr; gap:22px;}
+    .play-layout{grid-template-columns:1fr; gap:20px;}
+    .brand{margin-right:0; width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span> Hockeytactiek voor kids</div>
+    <nav class="navchips" aria-label="Ga naar onderdeel">
+      <a href="#posities">Posities</a>
+      <a href="#opbouwen">Opbouwen</a>
+      <a href="#vrijlopen">Vrijlopen</a>
+      <a href="#aannemen">Aannemen</a>
+      <a href="#verdedigen">Verdedigen</a>
+      <a href="#spelsituaties">Situaties</a>
+      <a href="#aanvallen">Aanvallen</a>
+      <a href="#pressen">Pressen</a>
+      <a href="#strafcorner">Strafcorner</a>
+      <a href="#oefeningen">Oefeningen</a>
+    </nav>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow">Veldhockey · voor jonge spelers</span>
+      <h1>Waar sta jij, en wat is <span class="hl">jouw taak?</span></h1>
+      <p>Snap in één keer wat elke positie doet, hoe je de bal van achteruit naar voren speelt, hoe je je vrijloopt en hoe je samen verdedigt. Druk op <b>Speel af</b> bij de tekeningen en kijk hoe het werkt.</p>
+      <div class="legend" aria-hidden="true">
+        <span><i class="swatch sw-ours"></i> Ons team</span>
+        <span><i class="swatch sw-opp"></i> Tegenstander</span>
+        <span><i class="swatch sw-ball"></i> Bal</span>
+        <span><i class="swatch sw-pass"></i> Pass</span>
+      </div>
+    </div>
+    <figure class="pitch" id="hero-pitch" aria-label="Bewegende tekening: de bal wordt in een driehoek rondgespeeld"></figure>
+  </div>
+</header>
+
+<main>
+  <!-- POSITIES -->
+  <section id="posities">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 1</span>
+        <h2>Het veld &amp; de posities</h2>
+        <p>Een team is 11 spelers: 1 keeper, 4 verdedigers, 3 middenvelders en 3 aanvallers (opstelling 4‑3‑3). Tik op een speler om te zien wat zijn of haar taak is.</p>
+      </div>
+      <div class="play-layout">
+        <figure class="pitch" id="explorer" aria-label="Hockeyveld met alle posities. Kies een speler."></figure>
+        <div class="pos-card" id="pos-card" aria-live="polite">
+          <span class="badge" id="pos-badge">K</span>
+          <h3 id="pos-name">Keeper</h3>
+          <p class="role" id="pos-role">Doelverdediger</p>
+          <ul id="pos-tasks"></ul>
+          <p class="hint-tap">Tik op een andere speler in het veld ▸</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPBOUWEN -->
+  <section id="opbouwen">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 2</span>
+        <h2>Opbouwen van achteruit</h2>
+        <p>Ren niet meteen naar voren met de bal. Speel hem rustig rond via <b>driehoekjes</b> tot je een gaatje ziet. Zo speel je de tegenstander uit.</p>
+      </div>
+      <div class="play-layout">
+        <figure class="pitch" id="p-opbouw" aria-label="Animatie: de bal wordt van de keeper via de zijkant naar het midden gespeeld."></figure>
+        <div class="tips">
+          <h3>Zo doe je dat</h3>
+          <ol class="steps">
+            <li><span class="n">1</span><span><b>Maak driehoekjes.</b> Zorg dat de speler met de bal altijd twee maatjes heeft om naar te spelen: één in de breedte, één in de diepte.</span></li>
+            <li><span class="n">2</span><span><b>Maak het veld breed.</b> Backs naar de zijlijn. Zo trek je de tegenstander uit elkaar en ontstaat er ruimte.</span></li>
+            <li><span class="n">3</span><span><b>Binden en spelen.</b> Loop met de bal naar een tegenstander toe en pas dán af. Nu is die tegenstander uitgespeeld.</span></li>
+            <li><span class="n">4</span><span><b>Lukt naar voren niet?</b> Speel rustig terug of naar de zijkant en probeer het opnieuw. Balbezit houden is winst.</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VRIJLOPEN -->
+  <section id="vrijlopen">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 3</span>
+        <h2>Vrijlopen &amp; driehoekjes</h2>
+        <p>De speler zónder bal is net zo belangrijk. Zorg dat je <b>aanspeelbaar</b> bent door je slim vrij te lopen.</p>
+      </div>
+      <div class="play-layout">
+        <figure class="pitch" id="p-vrij" aria-label="Animatie: een speler loopt eerst weg en dan snel de andere kant op om vrij te komen."></figure>
+        <div class="tips">
+          <h3>Zo kom je vrij</h3>
+          <ul class="tips-list">
+            <li><b>Loop uit de richting:</b> eerst even de verkeerde kant op, en dan snel de andere kant op. Zo laat je je verdediger staan.</li>
+            <li><b>Maak een driehoek</b> met de speler aan de bal: één optie in de breedte, één in de diepte.</li>
+            <li><b>Sta open</b> als je de bal krijgt, zodat je meteen verder kunt kijken en spelen.</li>
+            <li><b>Speel en loop door</b> (pass‑en‑go): geef de bal en ren meteen naar een nieuwe plek.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AANNEMEN & PASSEN -->
+  <section id="aannemen">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 4</span>
+        <h2>Aannemen &amp; passen</h2>
+        <p>Een goede pass is een cadeautje voor je maatje. En goed aannemen betekent: klaarstaan om meteen verder te spelen.</p>
+      </div>
+      <div class="play-layout">
+        <figure class="pitch" id="p-pass" aria-label="Animatie: de push-pass gaat laag over de grond naar een medespeler die open staat."></figure>
+        <div class="tips">
+          <h3>Onthoud dit</h3>
+          <ul class="tips-list">
+            <li><b>De push:</b> leg je stick tegen de bal en <i>duw</i> hem laag over de grond. Niet slaan — dan blijft de bal netjes op de grond.</li>
+            <li><b>Platte kant:</b> speel de bal altijd met de platte kant van je stick.</li>
+            <li><b>Speel vooruit in de loop:</b> als je maatje rent, speel de bal een stukje vóór hem uit, niet op zijn stick stil.</li>
+            <li><b>Open aannemen:</b> draai je zo dat je het hele veld ziet, en neem de bal <i>ver voor je stick</i> aan. Kijk meteen op: waar kan ik heen?</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERDEDIGEN -->
+  <section id="verdedigen">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 5</span>
+        <h2>Verdedigen: samen sterk</h2>
+        <p>Verdedigen doe je nooit alleen. Sta slim, dek de goede kant af en jaag samen op de bal.</p>
+      </div>
+      <div class="play-layout">
+        <figure class="pitch" id="p-verd" aria-label="Animatie: verdedigers staan in een W, dekken de binnenkant en dwingen de aanvaller naar de zijlijn."></figure>
+        <div class="tips">
+          <h3>De regels van het verdedigen</h3>
+          <ul class="tips-list">
+            <li><b>Sta open:</b> zorg dat je én de bal én je tegenstander kunt zien.</li>
+            <li><b>Dek de binnenkant:</b> sta tussen de aanvaller en je eigen doel. De weg naar de goal is dicht.</li>
+            <li><b>Dwing naar de zijlijn:</b> stuur de aanvaller naar buiten, weg van het gevaarlijke midden.</li>
+            <li><b>Sta in een W:</b> nooit met z'n allen naast elkaar op één lijn. Zo help je elkaar en kun je opvangen.</li>
+            <li><b>Jaag samen:</b> is de bal aan één kant, zet er dan met z'n allen druk op en blijf compact.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPELSITUATIES -->
+  <section id="spelsituaties">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 6</span>
+        <h2>Spelsituaties: wat doe je nu?</h2>
+        <p>In een wedstrijd komen steeds dezelfde momenten terug. Als je weet wat je dan moet doen, ben je je tegenstander te slim af. Hieronder een animatie van het <b>overtal (2‑tegen‑1)</b> en daaronder nog meer situaties.</p>
+      </div>
+      <div class="play-layout">
+        <figure class="pitch" id="p-situatie" aria-label="Animatie: 2-tegen-1. De speler met de bal bindt de verdediger en speelt af naar de vrije maat."></figure>
+        <div class="tips">
+          <h3>Overtal (2‑tegen‑1)</h3>
+          <ul class="tips-list">
+            <li><b>Loop recht op de verdediger af</b> met de bal. Zo dwing je hem te kiezen.</li>
+            <li><b>Kiest hij jou?</b> Speel dan meteen af naar je vrije maatje.</li>
+            <li><b>Speel op tijd:</b> niet te vroeg (dan kan hij terug), niet te laat (dan pakt hij de bal).</li>
+            <li><b>Je maatje loopt door</b> naar het doel — overtal benut!</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cards2" style="margin-top:22px" id="situatie-cards"></div>
+    </div>
+  </section>
+
+  <!-- AANVALLEN -->
+  <section id="aanvallen">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 7</span>
+        <h2>Aanvallen: passeren &amp; voorzet</h2>
+        <p>Hoe kom je langs een verdediger, en hoe maak je een doelpunt vanaf de zijkant? Twee animaties: eerst een <b>passeerbeweging</b> in de 1‑tegen‑1, daarna de <b>voorzet en afronden</b>.</p>
+      </div>
+
+      <div class="sc-block">
+        <h3 class="subhead"><span class="pill att">1‑tegen‑1</span> Langs de verdediger</h3>
+        <div class="play-layout">
+          <figure class="pitch" id="p-passeren" aria-label="Animatie: een aanvaller loopt op de verdediger af, trekt de bal opzij en gaat erlangs richting doel."></figure>
+          <div class="tips">
+            <ul class="tips-list">
+              <li><b>Loop recht op de verdediger af</b> zodat hij moet stilstaan en kiezen.</li>
+              <li><b>Kijk naar zijn stick:</b> ga naar de kant waar hij niet makkelijk bij kan.</li>
+              <li><b>Trek de bal snel opzij</b> (kleine tikjes, bal dicht bij je stick) en versnel er meteen langs.</li>
+              <li><b>Kan je er niet langs?</b> Speel dan af naar een vrije maat — passeren hoeft niet altijd.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-block">
+        <h3 class="subhead"><span class="pill att">Voorzet</span> Scoren vanaf de zijkant</h3>
+        <div class="play-layout">
+          <figure class="pitch" id="p-voorzet" aria-label="Animatie: de vleugelspeler gaat naar de achterlijn en geeft laag voor; de spits tikt binnen."></figure>
+          <div class="tips">
+            <ul class="tips-list">
+              <li><b>Neem de bal mee tot de achterlijn</b> voordat je voorgeeft. Zo staat de verdediging verkeerd.</li>
+              <li><b>Speel de voorzet laag en hard</b>, voor het doel langs.</li>
+              <li><b>Spits:</b> sta klaar met je stick op de grond bij de paal.</li>
+              <li><b>Bezet beide palen:</b> iemand bij de eerste én de tweede paal.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESSEN -->
+  <section id="pressen">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 8</span>
+        <h2>Druk zetten &amp; omschakelen</h2>
+        <p>Wil je de bal snel terug? Dan moet je samen jagen. En win je de bal? Schakel dan bliksemsnel om naar de aanval. Twee animaties.</p>
+      </div>
+
+      <div class="sc-block">
+        <h3 class="subhead"><span class="pill def">Pressen</span> Samen de bal afpakken</h3>
+        <div class="play-layout">
+          <figure class="pitch" id="p-pressen" aria-label="Animatie: de aanvallers zetten samen druk en dwingen de bal naar de zijlijn, waar ze hem veroveren."></figure>
+          <div class="tips">
+            <ul class="tips-list">
+              <li><b>Maak het veld klein:</b> zet met z'n allen tegelijk druk.</li>
+              <li><b>Loop bogend aan:</b> maak met je looprichting één kant dicht.</li>
+              <li><b>Dwing de bal naar de zijlijn</b>, weg van het gevaarlijke midden.</li>
+              <li><b>Anticipeer op de volgende pass</b> en onderschep 'm.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-block">
+        <h3 class="subhead"><span class="pill att">Omschakelen</span> De snelle tegenaanval</h3>
+        <div class="play-layout">
+          <figure class="pitch" id="p-omschakelen" aria-label="Animatie: na balverovering gaat de eerste pass vooruit en breekt het team snel uit."></figure>
+          <div class="tips">
+            <ul class="tips-list">
+              <li><b>Kijk meteen vooruit</b> als je de bal wint — de tegenstander staat nog verkeerd.</li>
+              <li><b>Speel de eerste bal naar voren</b>, niet veilig achteruit.</li>
+              <li><b>Ren met meerdere spelers mee</b> in de aanval.</li>
+              <li><b>Kies snelheid boven mooi spel:</b> wees er eerder dan de verdediging.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRAFCORNER -->
+  <section id="strafcorner">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 9</span>
+        <h2>De strafcorner</h2>
+        <p>Je krijgt een strafcorner als de verdediging een fout maakt ín de cirkel (of de bal expres over de eigen achterlijn speelt). Het is een topkans om te scoren. De verdediging mag met maximaal 5 spelers (inclusief keeper) achter de achterlijn staan. Pas als de <b>aangever</b> de bal speelt, mag iedereen de cirkel in — en de bal moet eerst <b>buiten de cirkel</b> gestopt worden voordat er op doel geschoten mag worden.</p>
+      </div>
+
+      <div class="sc-block">
+        <h3 class="subhead"><span class="pill att">Aanvallen</span> Zo scoor je</h3>
+        <div class="play-layout">
+          <figure class="pitch" id="p-sc-att" aria-label="Animatie: strafcorner aanvallen. Aangeven naar de kop van de cirkel, stoppen, en laag en hard op doel slaan."></figure>
+          <div class="tips">
+            <ul class="tips-list">
+              <li><b>Aangever (A):</b> speelt de bal hard en zuiver in vanaf de achterlijn naar de kop van de cirkel.</li>
+              <li><b>Stopper (S):</b> stopt de bal dood, nét buiten de cirkel, en legt hem klaar.</li>
+              <li><b>Schutter:</b> slaat de bal <b>laag en hard</b> op doel.</li>
+              <li><b>Rebounders (R):</b> staan klaar bij de palen voor de bal die terugspringt.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc-block">
+        <h3 class="subhead"><span class="pill def">Verdedigen</span> De veilige 3‑1</h3>
+        <div class="play-layout">
+          <figure class="pitch" id="p-sc-def" aria-label="Animatie: strafcorner verdedigen. De hardloper rent op de bal af, de lijnstop blijft op de lijn, de uitlopers dekken breed."></figure>
+          <div class="tips">
+            <ul class="tips-list">
+              <li><b>Keeper (K):</b> komt een paar passen naar voren en coördineert wie wat doet.</li>
+              <li><b>1e uitloper / hardloper (H):</b> rent recht op de bal af om het schot te blokken en de hoek klein te maken. Een rol voor dappere spelers!</li>
+              <li><b>Lijnstop (L):</b> blijft op de doellijn (meestal links naast de keeper) en ruimt op wat erlangs komt.</li>
+              <li><b>2e uitlopers links &amp; rechts (U):</b> lopen iets later uit en dekken de breedtebal en de rebound.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout"><b>Voor de jeugd:</b> hou het simpel — één vaste corner met een zuivere aangeef, een dode stop en een lage harde slag. De <b>sleeppush</b> (de harde gesleepte push) komt pas rond je 16e; die hoort er op jongere leeftijd nog niet bij. Bij het verdedigen mag je een masker op. En bij O10 is het nog geen strafcorner maar een <b>shoot‑out</b>: één aanvaller gaat 1‑tegen‑1 op de keeper af.</div>
+    </div>
+  </section>
+
+  <!-- OEFENINGEN -->
+  <section id="oefeningen">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Onderdeel 10</span>
+        <h2>Oefeningen om te trainen</h2>
+        <p>Kant‑en‑klare oefeningen voor op de training. Elke oefening zegt hoe je het opzet én waar je op let. Begin simpel en maak het moeilijker als het goed gaat.</p>
+      </div>
+      <div class="cards2" id="drills"></div>
+    </div>
+  </section>
+
+  <!-- BRONNEN -->
+  <section>
+    <div class="wrap">
+      <div class="sources">
+        <h3>Meer leren (voor coaches &amp; ouders)</h3>
+        <ul>
+          <li><a href="https://www.knhb.nl/clubsupport/trainer-tm/spel-en-techniek/techniekclub" target="_blank" rel="noopener">KNHB Techniekclub</a> — instructievideo's: passen, aannemen, verdedigen, passeren.</li>
+          <li><a href="https://www.knhb.nl/clubsupport/trainer-tm/spel-en-techniek/hockeytechnieken-het-hockeykompas" target="_blank" rel="noopener">KNHB Hockeykompas</a> — model voor balposities, passing en de juiste grip.</li>
+          <li><a href="https://www.knhb.nl/clubsupport/trainer-tm/leren-en-ontwikkelen/ontwikkelen-van-een-leerlijn" target="_blank" rel="noopener">KNHB Leerlijn &amp; Spelgericht Trainen</a> — veldbezetting, tactiek en spelersontwikkeling.</li>
+          <li><a href="https://www.knhb.nl/competitie/veldcompetitie/regelgeving/spelregels/basisregels" target="_blank" rel="noopener">KNHB Basisregels Veldcompetitie</a> — officiële spelregels en overtredingen.</li>
+          <li><a href="https://www.hockey.nl/alles-over-hockey/spelregels/basisregels" target="_blank" rel="noopener">Hockey.nl Spelregels &amp; Basis</a> — toegankelijk overzicht van alle regels.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">Gemaakt om te leren en te delen. Tactiek en termen zijn gebaseerd op de KNHB‑opbouw (posities, driehoekjes, opbouwen van achteruit, W‑dekking) en de KNHB/Hockey.nl basisregels.</div></footer>
+
+<script>
+"use strict";
+const REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const SVGNS = "http://www.w3.org/2000/svg";
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+/* ---------- pitch background (portrait, our goal at the bottom) ---------- */
+function pitchDefs(id){
+  return `<defs>
+    <linearGradient id="grad-${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="var(--pitch-b)"/><stop offset="1" stop-color="var(--pitch-a)"/>
+    </linearGradient>
+    <marker id="ah-pass-${id}" markerWidth="7" markerHeight="7" refX="5.5" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="var(--pass)"/></marker>
+    <marker id="ah-run-${id}" markerWidth="8" markerHeight="8" refX="5.5" refY="3.2" orient="auto">
+      <path d="M0.5,0.5 L6,3.2 L0.5,5.9" fill="none" stroke="var(--run)" stroke-width="1.4"/></marker>
+  </defs>`;
+}
+function fullField(id){
+  return `${pitchDefs(id)}
+    <rect x="8" y="8" width="284" height="444" rx="10" fill="url(#grad-${id})" stroke="var(--line)" stroke-width="3"/>
+    <line x1="8" y1="230" x2="292" y2="230" stroke="var(--line)" stroke-width="2.5"/>
+    <line x1="8" y1="125" x2="292" y2="125" stroke="var(--line)" stroke-width="1.6" stroke-dasharray="2 5" opacity=".8"/>
+    <line x1="8" y1="335" x2="292" y2="335" stroke="var(--line)" stroke-width="1.6" stroke-dasharray="2 5" opacity=".8"/>
+    <path d="M92 12 A 58 58 0 0 0 208 12" fill="none" stroke="var(--line)" stroke-width="2.2"/>
+    <path d="M92 448 A 58 58 0 0 1 208 448" fill="none" stroke="var(--line)" stroke-width="2.2"/>
+    <rect x="131" y="4" width="38" height="8" fill="var(--line)"/>
+    <rect x="131" y="448" width="38" height="8" fill="var(--line)"/>`;
+}
+function plainField(id){
+  return `${pitchDefs(id)}
+    <rect x="8" y="8" width="304" height="204" rx="14" fill="url(#grad-${id})" stroke="var(--line)" stroke-width="3"/>`;
+}
+
+/* ---------- generic builder ---------- */
+function buildPitch(mountId, opts){
+  const mount = document.getElementById(mountId);
+  const {vw=300, vh=460, field="full", players=[], ball=null, hints=[], animated=false} = opts;
+  const fieldSVG = field==="plain" ? plainField(mountId) : fullField(mountId);
+
+  const hintSVG = hints.map(h=>{
+    const pts = h.pts.map(p=>p.join(",")).join(" ");
+    const cls = h.type==="run" ? "run" : "pass";
+    return `<polyline points="${pts}" fill="none" stroke="var(--${cls})" stroke-width="${cls==='pass'?2.4:2}" stroke-dasharray="${cls==='pass'?'6 6':'2 7'}" opacity=".55" marker-end="url(#ah-${cls}-${mountId})" stroke-linecap="round"/>`;
+  }).join("");
+
+  const playerSVG = players.map(p=>{
+    const gid = mountId+"-"+p.id;
+    const r = p.r || 13;
+    return `<g class="pl team-${p.team}${p.click?' clickable':''}" id="${gid}" style="transform:translate(${p.x}px,${p.y}px)"
+            ${p.click?`role="button" tabindex="0" aria-label="${p.aria||p.label}"`:'aria-hidden="true"'}>
+      <circle class="halo" r="${r+6}"/>
+      <circle r="${r}"/>
+      <text text-anchor="middle" dy="4.5">${p.label}</text>
+    </g>`;
+  }).join("");
+
+  const ballSVG = ball ? `<g class="ball" id="${mountId}-ball" style="transform:translate(${ball.x}px,${ball.y}px)" aria-hidden="true"><circle r="6"/></g>` : "";
+
+  mount.innerHTML =
+    `<svg viewBox="0 0 ${vw} ${vh}" role="img">${fieldSVG}${hintSVG}${playerSVG}${ballSVG}</svg>`;
+
+  if(animated){
+    mount.insertAdjacentHTML("beforeend",
+      `<div class="anim-note" id="${mountId}-note">${opts.startNote||""}</div>
+       <div class="btnrow">
+         <button class="act play" id="${mountId}-play" type="button">▶ Speel af</button>
+         <button class="act reset" id="${mountId}-reset" type="button">↺ Opnieuw</button>
+       </div>`);
+  }
+
+  // reference map + initial positions
+  const refs = {}; players.forEach(p=>refs[p.id]={el:document.getElementById(mountId+"-"+p.id), x:p.x, y:p.y});
+  const ballEl = ball ? document.getElementById(mountId+"-ball") : null;
+  return {mount, refs, ballEl, ballInit:ball, players, opts};
+}
+
+/* ---------- animation runner ---------- */
+function place(el, x, y, dur){
+  el.style.transition = (REDUCE||!dur) ? "none" : `transform ${dur}ms cubic-bezier(.45,.05,.35,1)`;
+  el.style.transform = `translate(${x}px,${y}px)`;
+}
+function resetPitch(P){
+  P.players.forEach(p=>{ const r=P.refs[p.id]; r.x=p.x; r.y=p.y; place(r.el, p.x, p.y, 0); });
+  if(P.ballEl){ place(P.ballEl, P.ballInit.x, P.ballInit.y, 0); }
+  const note=document.getElementById(P.mount.id+"-note"); if(note) note.textContent = P.opts.startNote||"";
+}
+async function runSteps(P, steps){
+  const playBtn=document.getElementById(P.mount.id+"-play");
+  const note=document.getElementById(P.mount.id+"-note");
+  playBtn.disabled=true;
+  resetPitch(P);
+  await sleep(REDUCE?150:350);
+  for(const s of steps){
+    const dur = s.dur ?? 900;
+    if(s.note && note) note.textContent = s.note;
+    if(s.mv){ for(const id in s.mv){ const [x,y]=s.mv[id]; const r=P.refs[id]; r.x=x; r.y=y; place(r.el,x,y,dur); } }
+    if(s.ball && P.ballEl){ place(P.ballEl, s.ball[0], s.ball[1], dur); }
+    await sleep(dur + (s.hold||300));
+  }
+  playBtn.disabled=false;
+}
+function wire(P, steps, {loop=false}={}){
+  const playBtn=document.getElementById(P.mount.id+"-play");
+  const resetBtn=document.getElementById(P.mount.id+"-reset");
+  if(playBtn) playBtn.addEventListener("click", ()=>runSteps(P, steps));
+  if(resetBtn) resetBtn.addEventListener("click", ()=>{resetPitch(P);});
+  if(loop && !REDUCE){
+    const cycle=async()=>{ await runSteps(P, steps); await sleep(1200); cycle(); };
+    cycle();
+  }
+}
+
+/* =========================================================
+   HERO — looping mini build-up (triangle passing)
+   ========================================================= */
+{
+  const P = buildPitch("hero-pitch", {
+    field:"full",
+    players:[
+      {id:"a", team:"ours", label:"", x:150, y:390, r:12},
+      {id:"b", team:"ours", label:"", x:75,  y:265, r:12},
+      {id:"c", team:"ours", label:"", x:225, y:265, r:12},
+      {id:"d", team:"ours", label:"", x:150, y:150, r:12},
+      {id:"o", team:"opp",  label:"", x:150, y:305, r:12},
+    ],
+    ball:{x:150,y:390},
+    hints:[{type:"pass", pts:[[150,390],[75,265],[225,265],[150,150]]}],
+    animated:true,
+    startNote:"Rondspelen in een driehoek…",
+  });
+  const steps=[
+    {ball:[75,265], dur:800, note:"Speel breed…", mv:{o:[110,320]}},
+    {ball:[225,265], dur:850, note:"…en verleg naar de andere kant.", mv:{o:[150,300]}},
+    {ball:[150,150], dur:800, note:"Nu naar voren: aanvallen!"},
+  ];
+  // hide the note/buttons in hero for a cleaner ambient look
+  const note=document.getElementById("hero-pitch-note"); if(note) note.style.display="none";
+  const btns=P.mount.querySelector(".btnrow"); if(btns) btns.style.display="none";
+  wire(P, steps, {loop:true});
+}
+
+/* =========================================================
+   POSITIONS EXPLORER
+   ========================================================= */
+const POS = {
+  K:{name:"Keeper", role:"Doelverdediger", tasks:[
+    "Jij bent de baas in de cirkel: houd de bal uit het doel.",
+    "Praat hard met je verdedigers — jij ziet alles voor je.",
+    "Kom een paar passen uit je doel, dan maak je jezelf groot.",
+    "Sterk in 1‑tegen‑1 en bij de strafcorner."]},
+  LA:{name:"Linksachter", role:"Verdediger (links)", tasks:[
+    "Sta aan de linkerkant en verdedig de aanvaller die bij jou komt.",
+    "Win je duels en houd de tegenstander op je forehand.",
+    "Heb je de bal? Speel hem rustig naar een medespeler.",
+    "Bouw mee naar voren via de zijkant."]},
+  RA:{name:"Rechtsachter", role:"Verdediger (rechts)", tasks:[
+    "Sta aan de rechterkant en stop de aanvaller die bij jou komt.",
+    "Win je duels en dwing de tegenstander naar de zijlijn.",
+    "Neem vaak het initiatief om mee op te bouwen naar voren.",
+    "Verover je de bal? Speel hem meteen naar een maatje."]},
+  VS:{name:"Voorstopper", role:"Verdediger (centraal)", tasks:[
+    "Lees het spel: jij ziet de bal het eerst aankomen.",
+    "Onderschep diepe ballen en help de keeper.",
+    "Jij bent de spelverdeler achterin: verdeel de ballen.",
+    "Sluit aan bij de aanval als het kan."]},
+  MA:{name:"Laatste man", role:"Verdediger (diepst)", tasks:[
+    "Jij staat het diepst: blijf rustig en houd overzicht.",
+    "Ruim gevaar op als er iemand doorbreekt.",
+    "Verdeel de bal vanuit de verdediging naar het midden.",
+    "Blijf in de dekking — ren niet zomaar mee naar voren."]},
+  LM:{name:"Linksmidden", role:"Middenvelder (links)", tasks:[
+    "Ren het hele veld op en neer: verdedig én val aan.",
+    "Wees een aanspeelpunt voor de driehoek.",
+    "Maak acties richting de cirkel.",
+    "Help je linksachter als jullie verdedigen."]},
+  MM:{name:"Mid‑mid", role:"Middenvelder (centraal)", tasks:[
+    "Jij bent de motor en spelverdeler van het team.",
+    "Wees altijd aanspeelbaar: loop je slim vrij in de ruimte.",
+    "Loop lijnen open in de aanval en dicht in de verdediging.",
+    "Grote motor nodig — jij rent het meest!"]},
+  RM:{name:"Rechtsmidden", role:"Middenvelder (rechts)", tasks:[
+    "Ren het hele veld op en neer: verdedig én val aan.",
+    "Wees een aanspeelpunt voor de driehoek.",
+    "Maak acties richting de cirkel.",
+    "Help je rechtsachter als jullie verdedigen."]},
+  LV:{name:"Linksvoor", role:"Aanvaller (links)", tasks:[
+    "Houd het veld breed: blijf dicht bij de zijlijn.",
+    "Zo maak je ruimte in het midden voor de spits.",
+    "Kom terug richting middenlijn als jullie verdedigen.",
+    "Sta klaar voor de voorzet en de rebound."]},
+  MV:{name:"Midvoor (spits)", role:"Aanvaller (centraal)", tasks:[
+    "Jouw taak: scoren!",
+    "Sta continu klaar om aangespeeld te worden.",
+    "Neem de keeper het zicht af en maak ruimte voor anderen.",
+    "Blijf loeren bij de tweede paal voor de tip‑in."]},
+  RV:{name:"Rechtsvoor", role:"Aanvaller (rechts)", tasks:[
+    "Houd het veld breed: blijf dicht bij de zijlijn.",
+    "Zo maak je ruimte in het midden voor de spits.",
+    "Kom terug richting middenlijn als jullie verdedigen.",
+    "Sta klaar voor de voorzet en de rebound."]},
+};
+const explorerPlayers = [
+  {id:"MV", team:"ours", label:"MV", x:150, y:150, click:true, aria:"Midvoor"},
+  {id:"LV", team:"ours", label:"LV", x:62,  y:180, click:true, aria:"Linksvoor"},
+  {id:"RV", team:"ours", label:"RV", x:238, y:180, click:true, aria:"Rechtsvoor"},
+  {id:"LM", team:"ours", label:"LM", x:72,  y:278, click:true, aria:"Linksmidden"},
+  {id:"MM", team:"ours", label:"MM", x:150, y:288, click:true, aria:"Mid-mid"},
+  {id:"RM", team:"ours", label:"RM", x:228, y:278, click:true, aria:"Rechtsmidden"},
+  {id:"LA", team:"ours", label:"LA", x:80,  y:362, click:true, aria:"Linksachter"},
+  {id:"RA", team:"ours", label:"RA", x:220, y:362, click:true, aria:"Rechtsachter"},
+  {id:"VS", team:"ours", label:"VS", x:120, y:392, click:true, aria:"Voorstopper"},
+  {id:"MA", team:"ours", label:"MA", x:180, y:402, click:true, aria:"Laatste man"},
+  {id:"K",  team:"ours", label:"K",  x:150, y:432, click:true, aria:"Keeper"},
+];
+{
+  const P = buildPitch("explorer", {field:"full", players:explorerPlayers});
+  const badge=document.getElementById("pos-badge"), name=document.getElementById("pos-name"),
+        role=document.getElementById("pos-role"), tasks=document.getElementById("pos-tasks");
+  function select(id){
+    Object.values(P.refs).forEach(r=>r.el.classList.remove("sel"));
+    P.refs[id].el.classList.add("sel");
+    const d=POS[id];
+    badge.textContent = explorerPlayers.find(p=>p.id===id).label;
+    name.textContent=d.name; role.textContent=d.role;
+    tasks.innerHTML = d.tasks.map(t=>`<li>${t}</li>`).join("");
+  }
+  explorerPlayers.forEach(p=>{
+    const el=P.refs[p.id].el;
+    el.addEventListener("click", ()=>select(p.id));
+    el.addEventListener("keydown", e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); select(p.id);} });
+  });
+  select("K");
+}
+
+/* =========================================================
+   OPBOUWEN VAN ACHTERUIT
+   ========================================================= */
+{
+  const P = buildPitch("p-opbouw", {
+    field:"full",
+    players:[
+      {id:"K",  team:"ours", label:"K",  x:150, y:420},
+      {id:"LA", team:"ours", label:"LA", x:80,  y:365},
+      {id:"RA", team:"ours", label:"RA", x:215, y:365},
+      {id:"VS", team:"ours", label:"VS", x:135, y:390},
+      {id:"RM", team:"ours", label:"RM", x:220, y:285},
+      {id:"MM", team:"ours", label:"MM", x:150, y:282},
+      {id:"F",  team:"opp",  label:"", x:150, y:350},
+    ],
+    ball:{x:150, y:420},
+    hints:[{type:"pass", pts:[[150,420],[215,365],[220,285],[150,282]]}],
+    animated:true,
+    startNote:"De keeper heeft de bal. Rustig opbouwen van achteruit.",
+  });
+  const steps=[
+    {ball:[215,365], dur:850, note:"Speel naar de vrije back. Maak het veld breed.", mv:{F:[175,360]}},
+    {ball:[218,332], dur:700, note:"Loop met de bal naar de tegenstander toe (binden)…", mv:{RA:[218,332], F:[200,345]}},
+    {ball:[220,285], dur:800, note:"…en speel dán af. Zo is de tegenstander uitgespeeld."},
+    {ball:[150,282], dur:800, note:"Via de driehoek naar het midden — nu naar voren!"},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   VRIJLOPEN & DRIEHOEKJES
+   ========================================================= */
+{
+  const P = buildPitch("p-vrij", {
+    field:"full",
+    players:[
+      {id:"A", team:"ours", label:"A", x:150, y:375},
+      {id:"B", team:"ours", label:"B", x:95,  y:275},
+      {id:"C", team:"ours", label:"C", x:240, y:270},
+      {id:"D", team:"opp",  label:"", x:120, y:252},
+    ],
+    ball:{x:150, y:375},
+    hints:[{type:"run", pts:[[95,275],[122,305],[58,232]]},{type:"pass", pts:[[150,375],[70,244]]}],
+    animated:true,
+    startNote:"A heeft de bal. B wordt gedekt. B en C maken een driehoek — B: loop je vrij!",
+  });
+  const steps=[
+    {mv:{B:[122,305], D:[140,300]}, dur:750, note:"B loopt eerst naar binnen en neemt de verdediger mee…"},
+    {mv:{B:[58,232]}, dur:600, note:"…en sprint dan snel naar buiten. Nu is B vrij!"},
+    {ball:[70,244], dur:750, note:"Aangespeeld! B staat open — en C staat klaar voor de volgende pass."},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   AANNEMEN & PASSEN (close-up)
+   ========================================================= */
+{
+  const P = buildPitch("p-pass", {
+    vw:320, vh:220, field:"plain",
+    players:[
+      {id:"P", team:"ours", label:"", x:70,  y:160},
+      {id:"R", team:"ours", label:"", x:250, y:80},
+    ],
+    ball:{x:88, y:160},
+    hints:[{type:"pass", pts:[[88,160],[236,86]]}],
+    animated:true,
+    startNote:"De push: leg je stick tegen de bal en duw hem laag over de grond.",
+  });
+  const steps=[
+    {ball:[236,86], dur:1000, note:"Richt op de stick van je medespeler."},
+    {ball:[258,98], dur:500, note:"Open aannemen: bal ver voor je stick, en meteen opkijken."},
+  ];
+  wire(P, steps);
+  // annotations for the receiver
+  const svg=P.mount.querySelector("svg");
+  const anno=document.createElementNS(SVGNS,"g");
+  anno.setAttribute("aria-hidden","true");
+  anno.innerHTML=`
+    <text x="250" y="46" text-anchor="middle" fill="var(--line)" font-family="Fredoka" font-weight="600" font-size="12">sta open ▸ zie het veld</text>
+    <text x="150" y="200" text-anchor="middle" fill="var(--line)" font-family="Fredoka" font-weight="600" font-size="12">duwen, niet slaan — bal blijft laag</text>`;
+  svg.appendChild(anno);
+}
+
+/* =========================================================
+   VERDEDIGEN (W-shape, dek binnenkant)
+   ========================================================= */
+{
+  const P = buildPitch("p-verd", {
+    field:"full",
+    players:[
+      // our defenders in a W + keeper (our goal at the bottom)
+      {id:"D1", team:"ours", label:"", x:95,  y:360},
+      {id:"D2", team:"ours", label:"", x:150, y:345},
+      {id:"D3", team:"ours", label:"", x:205, y:360},
+      {id:"D4", team:"ours", label:"", x:150, y:400},
+      {id:"K",  team:"ours", label:"K", x:150, y:432},
+      // attackers coming down
+      {id:"O1", team:"opp", label:"", x:150, y:280},
+      {id:"O2", team:"opp", label:"", x:90,  y:300},
+      {id:"O3", team:"opp", label:"", x:210, y:300},
+    ],
+    ball:{x:150, y:280},
+    hints:[{type:"run", pts:[[150,345],[130,352],[100,352]]}],
+    animated:true,
+    startNote:"Wij verdedigen. Sta in een W en dek de binnenkant.",
+  });
+  const steps=[
+    {ball:[150,320], mv:{O1:[150,320], D2:[150,340]}, dur:800, note:"Sta tussen de aanvaller en je eigen doel."},
+    {ball:[103,335], mv:{O1:[103,335], D2:[128,348]}, dur:850, note:"Dwing hem naar de zijlijn, weg van het doel."},
+    {ball:[92,355],  mv:{D1:[92,355]}, dur:650, note:"Samen jagen — onderschep de bal!"},
+    {mv:{}, dur:400, note:"Bal veroverd! Nu snel omschakelen naar de aanval."},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   SPELSITUATIE — 2 tegen 1 (overtal)
+   ========================================================= */
+{
+  const P = buildPitch("p-situatie", {
+    field:"full",
+    players:[
+      {id:"A1", team:"ours", label:"1", x:108, y:300},
+      {id:"A2", team:"ours", label:"2", x:205, y:252},
+      {id:"D",  team:"opp",  label:"", x:150, y:235},
+    ],
+    ball:{x:108, y:300},
+    hints:[{type:"pass", pts:[[128,252],[205,252]]},{type:"run", pts:[[205,252],[178,122]]}],
+    animated:true,
+    startNote:"Jullie zijn met twee tegen één verdediger. Benut het overtal!",
+  });
+  const steps=[
+    {mv:{A1:[128,252], D:[142,236]}, ball:[128,252], dur:800, note:"Loop met de bal recht op de verdediger af (binden)."},
+    {ball:[205,252], dur:650, note:"De verdediger kiest jou — speel nu af naar je vrije maat!"},
+    {mv:{A2:[178,122]}, ball:[178,122], dur:850, note:"Speler 2 is vrij en gaat op het doel af. Overtal benut!"},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   STRAFCORNER — AANVALLEN
+   ========================================================= */
+{
+  const P = buildPitch("p-sc-att", {
+    field:"full",
+    players:[
+      {id:"INJ",  team:"ours", label:"A", x:214, y:14},
+      {id:"STOP", team:"ours", label:"S", x:150, y:72},
+      {id:"SH",   team:"ours", label:"", x:122, y:76},
+      {id:"R1",   team:"ours", label:"R", x:96,  y:62},
+      {id:"R2",   team:"ours", label:"R", x:204, y:62},
+      {id:"K",    team:"opp",  label:"K", x:150, y:22},
+      {id:"HL",   team:"opp",  label:"", x:180, y:20},
+    ],
+    ball:{x:214, y:14},
+    hints:[{type:"pass", pts:[[214,14],[150,72]]},{type:"pass", pts:[[122,76],[146,20]]}],
+    animated:true,
+    startNote:"A geeft aan vanaf de achterlijn. De rest (S en de R's) wacht buiten de cirkel.",
+  });
+  const steps=[
+    {ball:[150,72], mv:{HL:[158,48]}, dur:800, note:"A geeft aan: hard en zuiver naar de kop van de cirkel."},
+    {ball:[122,76], mv:{HL:[144,60]}, dur:600, note:"S stopt de bal dood en legt hem klaar, nét buiten de cirkel."},
+    {ball:[146,20], dur:450, note:"Slaan: laag en hard op doel!"},
+    {ball:[104,46], mv:{R1:[104,54]}, dur:550, note:"De rebounders (R) staan klaar voor de terugspringende bal."},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   STRAFCORNER — VERDEDIGEN (3-1)
+   ========================================================= */
+{
+  const P = buildPitch("p-sc-def", {
+    field:"full",
+    players:[
+      {id:"K",    team:"ours", label:"K", x:150, y:24},
+      {id:"LS",   team:"ours", label:"L", x:124, y:20},
+      {id:"HL",   team:"ours", label:"H", x:176, y:20},
+      {id:"U2L",  team:"ours", label:"U", x:100, y:26},
+      {id:"U2R",  team:"ours", label:"U", x:200, y:26},
+      {id:"INJ",  team:"opp",  label:"A", x:214, y:14},
+      {id:"STOP", team:"opp",  label:"S", x:150, y:72},
+      {id:"SH",   team:"opp",  label:"", x:124, y:74},
+    ],
+    ball:{x:214, y:14},
+    hints:[{type:"run", pts:[[176,20],[150,58]]}],
+    animated:true,
+    startNote:"Verdedig met z'n vijven: keeper (K), lijnstop (L), hardloper (H) en twee uitlopers (U).",
+  });
+  const steps=[
+    {ball:[150,72], mv:{HL:[150,58], U2L:[110,52], U2R:[190,52], LS:[138,32], K:[150,34]}, dur:750, note:"Aangegeven! Iedereen loopt tegelijk uit."},
+    {ball:[124,74], mv:{HL:[138,62]}, dur:600, note:"De hardloper (H) rent recht op de bal af en maakt de hoek klein."},
+    {ball:[138,50], dur:450, note:"Geblokt! De lijnstop (L) en de keeper ruimen de rest op."},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   AANVALLEN — 1 tegen 1 passeren
+   ========================================================= */
+{
+  const P = buildPitch("p-passeren", {
+    field:"full",
+    players:[
+      {id:"A", team:"ours", label:"", x:150, y:310},
+      {id:"D", team:"opp",  label:"", x:150, y:235},
+    ],
+    ball:{x:150, y:310},
+    hints:[{type:"run", pts:[[150,310],[150,272],[112,222],[150,120]]}],
+    animated:true,
+    startNote:"Jij hebt de bal, één verdediger voor je. Kom erlangs!",
+  });
+  const steps=[
+    {mv:{A:[150,272], D:[150,252]}, ball:[150,272], dur:800, note:"Loop met de bal recht op de verdediger af."},
+    {mv:{A:[112,222], D:[142,242]}, ball:[112,222], dur:600, note:"Trek de bal snel opzij en versnel erlangs."},
+    {mv:{A:[150,120]}, ball:[150,120], dur:750, note:"Erlangs! Nu recht op het doel af."},
+    {ball:[150,24], dur:450, note:"En scoren!"},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   AANVALLEN — voorzet & afronden
+   ========================================================= */
+{
+  const P = buildPitch("p-voorzet", {
+    field:"full",
+    players:[
+      {id:"W",   team:"ours", label:"", x:228, y:180},
+      {id:"ST",  team:"ours", label:"", x:150, y:64},
+      {id:"ST2", team:"ours", label:"", x:118, y:66},
+      {id:"K",   team:"opp",  label:"K", x:150, y:22},
+    ],
+    ball:{x:228, y:180},
+    hints:[{type:"run", pts:[[228,180],[224,34]]},{type:"pass", pts:[[224,34],[150,58]]}],
+    animated:true,
+    startNote:"De vleugelspeler heeft de bal aan de zijkant. Twee spitsen wachten voor het doel.",
+  });
+  const steps=[
+    {mv:{W:[224,34]}, ball:[224,34], dur:850, note:"Ga met de bal helemaal naar de achterlijn."},
+    {mv:{ST:[150,58]}, ball:[150,58], dur:650, note:"Speel een lage, harde voorzet voor het doel."},
+    {mv:{ST:[150,46]}, ball:[150,24], dur:450, note:"Tik 'm binnen bij de paal — en scoren!"},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   PRESSEN — samen druk zetten
+   ========================================================= */
+{
+  const P = buildPitch("p-pressen", {
+    field:"full",
+    players:[
+      {id:"OB1", team:"opp",  label:"", x:150, y:120},
+      {id:"OB2", team:"opp",  label:"", x:92,  y:112},
+      {id:"OB3", team:"opp",  label:"", x:208, y:112},
+      {id:"F1",  team:"ours", label:"", x:150, y:178},
+      {id:"F2",  team:"ours", label:"", x:95,  y:168},
+      {id:"F3",  team:"ours", label:"", x:205, y:168},
+    ],
+    ball:{x:150, y:120},
+    hints:[{type:"run", pts:[[150,178],[134,152]]}],
+    animated:true,
+    startNote:"De tegenstander (rood) bouwt op. Zet er met z'n allen druk op!",
+  });
+  const steps=[
+    {mv:{F1:[134,150]}, dur:750, note:"Zet druk op de bal en maak de binnenkant dicht."},
+    {ball:[208,112], mv:{F3:[205,138]}, dur:700, note:"De bal moet naar buiten — precies wat je wilt."},
+    {ball:[208,120], mv:{F3:[208,120]}, dur:550, note:"Jaag door en verover de bal aan de zijlijn!"},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   OMSCHAKELEN — de snelle tegenaanval
+   ========================================================= */
+{
+  const P = buildPitch("p-omschakelen", {
+    field:"full",
+    players:[
+      {id:"D1", team:"ours", label:"", x:150, y:300},
+      {id:"M",  team:"ours", label:"", x:205, y:230},
+      {id:"F",  team:"ours", label:"", x:150, y:140},
+      {id:"O",  team:"opp",  label:"", x:150, y:262},
+    ],
+    ball:{x:150, y:300},
+    hints:[{type:"pass", pts:[[150,300],[205,230]]},{type:"pass", pts:[[205,230],[150,140]]}],
+    animated:true,
+    startNote:"Je hebt net de bal veroverd op je eigen helft.",
+  });
+  const steps=[
+    {dur:600, note:"Bal veroverd! Kijk meteen vooruit."},
+    {ball:[205,230], mv:{O:[168,270]}, dur:650, note:"Speel snel de eerste bal vooruit."},
+    {ball:[150,140], mv:{M:[200,192]}, dur:750, note:"Verleg naar de spits en loop met z'n allen mee."},
+    {mv:{F:[150,95]}, ball:[150,95], dur:700, note:"Tegenaanval! Voordat de tegenstander terug is."},
+  ];
+  wire(P, steps);
+}
+
+/* =========================================================
+   SPELSITUATIE-KAARTEN
+   ========================================================= */
+const SITUATIES = [
+  ["Balbezit","Rug naar voren, druk in je rug","Krijg je de bal met een tegenstander in je rug? <b>Kaats hem meteen terug</b> naar de speler die 'm gaf, of draai open weg van de druk. Speel niet blind naar voren."],
+  ["Verdedigen","Ondertal achterin (1‑tegen‑2)","Sta je alleen tegen twee? <b>Vertraag</b>: blijf tussen de bal en je doel, dwing ze naar de zijlijn en wacht tot een maatje je komt helpen. Duik niet in."],
+  ["Omschakelen","Je verliest de bal","Meteen met z'n allen <b>een paar tellen jagen</b> om de bal terug te pakken. Hoe sneller je druk zet, hoe groter de kans dat je 'm terugwint."],
+  ["Omschakelen","Je verovert de bal","Kijk direct vooruit en speel snel de <b>eerste bal naar voren</b>. Vlak na balverovering staat de tegenstander vaak nog niet goed."],
+  ["Opbouw","De tegenstander presst hoog","Word je onder druk gezet bij het opbouwen? <b>Verleg de bal rustig naar de andere kant</b> (soms via de keeper) en zoek de vrije speler. Rustig blijven."],
+];
+document.getElementById("situatie-cards").innerHTML = SITUATIES.map(s=>
+  `<div class="card"><span class="tag">${s[0]}</span><h3>${s[1]}</h3><p>${s[2]}</p></div>`
+).join("");
+
+/* =========================================================
+   OEFENINGEN-KAARTEN
+   ========================================================= */
+const DRILLS = [
+  ["Techniek","Passen in tweetallen","Twee spelers, 8–12 m uit elkaar. Push de bal heen en weer. Lukt het makkelijk? Zet verder uit elkaar.","Duwen, niet slaan. Bal laag. Open aannemen en mikken op de stick."],
+  ["Techniek","Poortjes‑push","Zet met 2 pionnen kleine poortjes. Speel de bal door het poortje naar je maatje.","Zuiver mikken en de bal over de grond houden."],
+  ["Balbezit","Rondo 3‑tegen‑1","3 spelers in een driehoek houden de bal, 1 speler probeert 'm te pakken. Balverlies = jij wordt de pakker.","Maak driehoekjes, loop je vrij en speel op tijd af."],
+  ["Techniek","Aannemen in beweging","Loop langs een pion, krijg de bal in je loop en neem hem ver voor je stick aan.","Blijf bewegen en kijk over de bal — meteen weer opkijken."],
+  ["Opbouw","5‑tegen‑3 opbouwen","Twee vakken. Het team met 5 houdt de bal en speelt 'm naar het andere vak. 3 zetten druk.","Maak het veld breed en verleg de bal naar de vrije kant."],
+  ["Verdedigen","1‑tegen‑1 verdedigen","Aanvaller probeert langs de verdediger naar een lijn te komen. Verdediger stopt hem.","Sta open, dek de binnenkant en dwing naar de zijlijn."],
+  ["Aanvallen","2‑tegen‑1 naar de cirkel","Twee aanvallers tegen één verdediger richting de cirkel. Probeer te scoren.","Bind de verdediger en speel op tijd af naar je vrije maat."],
+  ["Afronden","Scoren bij de tweede paal","Speel een bal vanaf de zijkant voor het doel. Een speler bij de tweede paal tikt 'm binnen.","Stick op de grond, blijf loeren en sta klaar voor de rebound."],
+  ["Standaard","Strafcorner‑drill","Oefen: aangeef → dode stop aan de kop van de cirkel → lage harde slag, met 2 rebounders bij de palen.","Zuivere aangeef en een snelle, rustige stop. Tempo!"],
+  ["Aanvallen","Passeren 1‑tegen‑1","Aanvaller met bal tegen één verdediger op een klein vak. Kom erlangs en scoor in een mini‑goal.","Recht op de verdediger af, dan snel opzij trekken en versnellen."],
+  ["Aanvallen","Voorzet &amp; afronden","Speler dribbelt over de zijkant naar de achterlijn en geeft laag voor. Twee spelers duiken de cirkel in.","Lage, harde voorzet; spits met de stick op de grond bij de paal."],
+  ["Pressen","Samen jagen (3‑tegen‑3)","3 tegen 3 op een klein veld met mini‑doeltjes. Wie de bal verliest, zet meteen druk.","Maak één kant dicht en jaag samen naar de zijlijn."],
+  ["Omschakelen","Van verdedigen naar aanvallen","Klein partijtje. Zodra je de bal wint, mag je in 6 seconden scoren op een mini‑goal.","Eerste bal vooruit en met meerdere spelers mee naar voren."],
+  ["Techniek","Backhand oefenen","Push en stop de bal op je backhand, tegen een muur of met een maatje.","Stick laag, twee handen aan de stick, bal onder controle."],
+  ["Fitheid","Shuttle met bal","Dribbel tussen pionnen heen en weer, elke ronde iets sneller. Klok je tijd.","Bal dicht bij je stick en toch af en toe opkijken."],
+  ["Keeper","Keeper: uitkomen","Keeper start op de lijn, een aanvaller komt op doel af. De keeper komt op tijd uit en maakt zich groot.","Kleine snelle passen, groot blijven, geduld houden."],
+];
+document.getElementById("drills").innerHTML = DRILLS.map(d=>
+  `<div class="card"><span class="tag">${d[0]}</span><h3>${d[1]}</h3><p><span class="lbl">Zo zet je 't op</span>${d[2]}</p><p><span class="lbl">Waar let je op</span>${d[3]}</p></div>`
+).join("");
+</script>
+</body>
+</html>
