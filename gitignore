@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# Editors / IDE's
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+
+# Tijdelijke en backupbestanden
+*.tmp
+*.temp
+*.bak
+*.log
+*.swp
+*.swo
+
+# Node (alleen relevant als je later tooling toevoegt)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Omgevingsbestanden
+.env
+.env.local
